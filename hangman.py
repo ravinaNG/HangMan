@@ -45,7 +45,9 @@ def get_available_letters(letters_guessed):
     jo ki `bcdfghijklmnopqrstuvwxyz' ye hoga
     '''
     import string
-    letters_left = string.ascii_lowercase
+    letters_left = string.ascii_lowercase 
+    #ascii_lowercase is a pre-initialized string used as string constant,
+    #will give the lowercase letters ‘abcdefghijklmnopqrstuvwxyz’.
 
     return letters_left
 
@@ -68,31 +70,31 @@ def hangman(secret_word):
       jo user ne abhi tak guess nahi kiye hai
 
     '''
-    print "Welcome to the game, Hangman!"
-    print "I am thinking of a word that is " + str(len(secret_word)) + " letters long."
-    print ""
+    print ("Welcome to the game, Hangman!")
+    print ("I am thinking of a word that is " + str(len(secret_word)) + " letters long.")
+    print ("")
 
     letters_guessed = []
     
     available_letters = get_available_letters(letters_guessed)
-    print "Available letters: " + available_letters
+    print ("Available letters: " + available_letters)
 
     guess = raw_input("Please guess a letter: ")
     letter = guess.lower()
 
     if letter in secret_word:
         letters_guessed.append(letter)
-        print "Good guess: " + get_guessed_word(secret_word, letters_guessed)
-        print ""
+        print ("Good guess: " + get_guessed_word(secret_word, letters_guessed))
+        print ("")
 
         if is_word_guessed(secret_word, letters_guessed) == True:
-            print " * * Congratulations, you won! * * "
-            print ""
+            print (" * * Congratulations, you won! * * ")
+            print ("")
 
     else:
-        print "Oops! That letter is not in my word: " + get_guessed_word(secret_word, letters_guessed)
+        print ("Oops! That letter is not in my word: " + get_guessed_word(secret_word, letters_guessed))
         letters_guessed.append(letter)
-        print ""
+        print ("")
     
 # Load the list of words into the variable wordlist
 # So that it can be accessed from anywhere in the program
