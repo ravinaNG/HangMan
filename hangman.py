@@ -6,19 +6,7 @@ from images import IMAGES
 # -----------------------------------
 
 def is_word_guessed(secret_word, letters_guessed):
-  # index = 0
-  # checking = 1
-  # while (index < len(secret_word)):
-  #   if(index == len(letters_guessed)):
-  #     break
-  #   if(secret_word[index] == letters_guessed[index]):
-  #     checking = checking + 1
-  #   else:
-  #     checking = checking - 1
-  #   index = index + 1
-  if(len(secret_word) == len(letters_guessed)):
-    return True
-  else:
+  
     return False
 
 # Iss function ko test karne ke liye aap get_guessed_word("kindness", [k, n, d]) call kar sakte hai
@@ -39,11 +27,24 @@ def get_guessed_word(secret_word, letters_guessed):
 def get_available_letters(letters_guessed):
     
     import string
-    letters_left = string.ascii_lowercase 
+    all_letters = string.ascii_lowercase 
     #ascii_lowercase is a pre-initialized string used as string constant,
     #will give the lowercase letters ‘abcdefghijklmnopqrstuvwxyz’.
 
+    letters_left = ""
+
+    for letter in all_letters:
+        if letter not in letters_guessed:
+            letters_left += letter
+    
     return letters_left
+
+def ifValid(user_input):
+    if len(user_input) != 1:
+        return False
+    if not user_input.isalpha():
+        return False
+    return True
 
 def hangman(secret_word):
   print ("Welcome to the game, Hangman!")
@@ -59,6 +60,11 @@ def hangman(secret_word):
 
     guess = input("Please guess a letter: ")
     letter = guess.lower()
+
+    if(not ifValid(letter)):
+        print('Please type only character.')
+        print ("")
+        continue
 
     if letter in secret_word:
         letters_guessed.append(letter)
