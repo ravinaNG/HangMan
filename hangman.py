@@ -6,7 +6,9 @@ from images import IMAGES
 # -----------------------------------
 
 def is_word_guessed(secret_word, letters_guessed):
-  
+    guessed_word = get_guessed_word(secret_word, letters_guessed)
+    if(secret_word == guessed_word):
+        return True
     return False
 
 # Iss function ko test karne ke liye aap get_guessed_word("kindness", [k, n, d]) call kar sakte hai
@@ -46,6 +48,19 @@ def ifValid(user_input):
         return False
     return True
 
+def get_hint(secret_word, letters_guessed):
+    import random
+    letters_not_guessed = []
+
+    index = 0
+    while(index < len(secret_word)):
+        letter = secret_word[index]
+        if(letter not in letters_guessed):
+            if(letter not in letters_not_guessed):
+                letters_not_guessed.append(letter)
+        index += 1
+    return random.choice(letters_not_guessed)
+
 def hangman(secret_word):
   print ("Welcome to the game, Hangman!")
   print ("I am thinking of a word that is " + str(len(secret_word)) + " letters long.")
@@ -58,13 +73,15 @@ def hangman(secret_word):
     available_letters = get_available_letters(letters_guessed)
     print ("Available letters: " + available_letters)
 
-    guess = input("Please guess a letter: ")
-    letter = guess.lower()
-
-    if(not ifValid(letter)):
-        print('Please type only character.')
-        print ("")
-        continue
+    guess = input("(For hint type hint) otherwise Please guess a letter: ")
+    if (guess == 'hint' or guess == 'Hint'):
+        letter = get_hint(secret_word, letters_guessed)
+    else:
+        letter = guess.lower()
+        if(not ifValid(letter)):
+            print('Please type only character.')
+            print ("")
+            continue
 
     if letter in secret_word:
         letters_guessed.append(letter)
