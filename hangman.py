@@ -2,16 +2,12 @@ import string
 from words import choose_word
 from images import IMAGES
 
-# End of helper code
-# -----------------------------------
-
 def is_word_guessed(secret_word, letters_guessed):
     guessed_word = get_guessed_word(secret_word, letters_guessed)
     if(secret_word == guessed_word):
         return True
     return False
 
-# Iss function ko test karne ke liye aap get_guessed_word("kindness", [k, n, d]) call kar sakte hai
 def get_guessed_word(secret_word, letters_guessed):
     
     index = 0
@@ -59,7 +55,7 @@ def get_hint(secret_word, letters_guessed):
             if(letter not in letters_not_guessed):
                 letters_not_guessed.append(letter)
         index += 1
-    return random.choice(letters_not_guessed)
+    return random.choice(letters_not_guessed)  
 
 def hangman(secret_word):
   print ("Welcome to the game, Hangman!")
@@ -113,7 +109,5 @@ def hangman(secret_word):
         remaining_lives -= 1
         print ('Remaining Live : ', remaining_lives)
   
-# Load the list of words into the variable wordlist
-# So that it can be accessed from anywhere in the program
 secret_word = choose_word()
 hangman(secret_word)
